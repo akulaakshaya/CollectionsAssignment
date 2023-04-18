@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 class Student {
 	int regNo;
@@ -228,6 +229,43 @@ class ScoreReaderThread extends Thread {
 
 }
 
+// Question-9
+
+// Write a class to demonstrate the usage of concurrent Queue by adding different gamescores
+// by different PlayerThreads and subsequently read the scores by using ScoreReaderThread.
+class useofConcurrentQueue {
+	ConcurrentLinkedQueue<PlayerThread> clq = new ConcurrentLinkedQueue<>();
+	ConcurrentLinkedQueue<ScoreReaderThread> clq1 = new ConcurrentLinkedQueue<>();
+	MyGameTeam mgt = new MyGameTeam();
+	PlayerThread pt = new PlayerThread(mgt);
+	PlayerThread pt1 = new PlayerThread(mgt);
+	PlayerThread pt2 = new PlayerThread(mgt);
+	ScoreReaderThread st = new ScoreReaderThread(mgt);
+	ScoreReaderThread st1 = new ScoreReaderThread(mgt);
+	ScoreReaderThread st2 = new ScoreReaderThread(mgt);
+
+	public useofConcurrentQueue() {
+		clq.add(pt);
+		clq.add(pt1);
+		clq.add(pt2);
+		clq1.add(st);
+		clq1.add(st1);
+		clq1.add(st2);
+		Iterator<PlayerThread> itr = clq.iterator();
+		while (itr.hasNext()) {
+			itr.next().start();
+		}
+		Iterator<ScoreReaderThread> itr1 = clq1.iterator();
+		while (itr1.hasNext()) {
+			itr1.next().start();
+		}
+		while(itr.next() or itr1.next()) {
+			
+		}
+	}
+
+}
+
 public class qns1Student {
 
 	public static void main(String[] args) {
@@ -235,11 +273,11 @@ public class qns1Student {
 
 		Student s = new Student(1, "Akshaya", new Date("12/30/2000"), "CSE", 8.4f, (short) 2023);
 		s.displayProfile();
-		// myTeam m = new myTeam();
-		// m.sortAndPrintByDOB();
-		// m.sortAndPrintByCGPA();
-		// MyBatch mb = new MyBatch(s);
-		// mb.displaySemWiseMarks();
+		myTeam m = new myTeam();
+		m.sortAndPrintByDOB();
+		m.sortAndPrintByCGPA();
+		MyBatch mb = new MyBatch(s);
+		mb.displaySemWiseMarks();
 
 		GameScore gs = new GameScore("Cricket", 125);
 		GameScore gs1 = new GameScore("Hockey", 13);
@@ -247,14 +285,15 @@ public class qns1Student {
 		// mgt.setScore(gs);
 		// mgt.setScore(gs1);
 		// mgt.getScore();
-		PlayerThread pt = new PlayerThread(mgt);
-		pt.start();
-		ScoreReaderThread st = new ScoreReaderThread(mgt);
-
-		ScoreReaderThread st1 = new ScoreReaderThread(mgt);
-		st.start();
-		st1.start();
-
+		// PlayerThread pt = new PlayerThread(mgt);
+		// pt.start();
+		// ScoreReaderThread st = new ScoreReaderThread(mgt);
+		//
+		// ScoreReaderThread st1 = new ScoreReaderThread(mgt);
+		// st.start();
+		// st1.start();
+		System.out.println("Concurrent Queue Execution");
+		useofConcurrentQueue ucq = new useofConcurrentQueue();
 	}
 
 }

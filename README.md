@@ -1,6 +1,6 @@
 # CollectionsAssignment1NKXGEN
 
-www.nkxgen.com
+
 Practice Exercise on Collections 
 1. Create a Student class with following members and methods.
 -int regNo
@@ -31,7 +31,6 @@ String gameName;
 int score;
 }
 7. Create a PlayerThread class with the constructor to accept MyGameTeam as an object
-www.nkxgen.com
 and add some random scores to the recieved MyGameTeam object through setScore() method
 under the run() method of thread.
 8. Create a ScoreReaderThread class with the constructor to accept MyGameTeam as an object
